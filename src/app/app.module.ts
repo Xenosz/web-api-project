@@ -8,38 +8,38 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { HomeComponent } from './home/home.component';
+import { MarvelComponent } from './marvel/marvel.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
-
 
 
 import { WinkelStratenService } from './services/winkelstraten.service';
 import { VeloService } from './services/fietsstations.service';
 import { WeatherService } from './services/weather.service';
 import { AirQualityService } from './services/airquality.service';
+import { MarvelService } from './services/marvel.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    MarvelComponent,
     NavbarComponent
   ],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent},
-      { path: 'rest', component: HomeComponent},
-      { path: '', component: HomeComponent}
+      { path: 'home', component: MarvelComponent},
+      { path: 'rest', component: MarvelComponent},
+      { path: '*', component: MarvelComponent}
     ], { useHash: true }),
     FormsModule,
     HttpClientModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
+    MarvelService
   ],
   bootstrap: [AppComponent]
 })

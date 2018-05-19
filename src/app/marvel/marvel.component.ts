@@ -1,16 +1,50 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MarvelService  } from "../services/marvel.service";
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html'
+    selector: 'app-marvel',
+    templateUrl: './marvel.component.html'
 })
-export class HomeComponent
+export class MarvelComponent implements OnInit
 {
-    characters:Result[];
+    constructor(private _svc: MarvelService){}
+
+    ngOnInit(): void { }
     character:Result;
 
-    constructor(private _svc: MarvelService){}
+    characters: Result[];
+    searching: string;
+    limit = 10;
+    offset = 0;
+    page = 0;
+    public GetCharacters()
+    {
+        this.characters = null;
+        this._svc.GetCharacterNameBeginsWith(this.searching,this.limit,this.offset).subscribe(result =>
+            {
+                this.characters = result.data.results;
+                console.log(result);
+                console.log(result.data.results);
+            });
+    }
+
+    id: number;
+    public GetCharacter()
+    {
+        this.character = null;
+        this._svc.GetCharacterWithId(this.id).subscribe(result =>
+            {
+                this.character = result.data.results[0];
+                console.log(result);
+                console.log(this.character);
+            });
+    }
+
+    public PageToOffset()
+    {
+        this.offset = this.page*this.limit;
+        this.GetCharacters();
+    }
 
 
 

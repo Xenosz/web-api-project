@@ -1,0 +1,65 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <H3>Marvel Characters</H3>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">search by name</h5>
+                    <p class="card-text">you can use this to search by name, you can also u.</p>
+                    <br>
+                    name to search:
+                    <input type="text" [(ngModel)]="searching" (change)="GetCharacters()"/>
+                    results per page:
+                    <input type="number" [(ngModel)]="limit" width="20" (change)="GetCharacters()"/>
+                    page:
+                    <input type="number" [(ngModel)]="page"  (change)="PageToOffset()" width="20"/>
+                </div>
+            </div>
+            <br>
+            
+            <div *ngFor="let char of characters">
+                <div class="card" >
+                    <div class="card-body">
+                        <h2>{{char.name}}</h2>
+                        <p>{{char.id}}</p>
+                        <img class="img-fluid" src="{{char.thumbnail.path}}.{{char.thumbnail.extension}}" width="200" alt="No image">
+                    </div>
+                </div>
+                <br>
+            </div>
+
+
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <H3>Marvel Character</H3>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">search by id</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+                    <input type="number" [(ngModel)]="id" (change)="GetCharacter()"/>
+                    
+                </div>
+            </div>
+            <br>
+            
+            <div *ngIf="character">
+                <div class="card" >
+                    <div class="card-body">
+                        <h2>{{character.name}}</h2>
+                        <p>{{character.id}}</p>
+                        <img class="img-fluid" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" width="200" alt="No image">
+                    </div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+    </div>
+</div>
