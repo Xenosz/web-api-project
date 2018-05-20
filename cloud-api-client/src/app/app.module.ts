@@ -7,31 +7,26 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { MarvelComponent } from './marvel/marvel.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-
-import { WinkelStratenService } from './services/winkelstraten.service';
-import { VeloService } from './services/fietsstations.service';
-import { WeatherService } from './services/weather.service';
-import { AirQualityService } from './services/airquality.service';
 import { MarvelService } from './services/marvel.service';
-
-
+import { PeopleNJobsService } from './services/peoplenjobs.service';
+import { RestComponent } from './restapi/rest.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MarvelComponent,
-    NavbarComponent
+    NavbarComponent,
+    RestComponent
   ],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot([
       { path: 'home', component: MarvelComponent},
-      { path: 'rest', component: MarvelComponent},
+      { path: 'rest', component: RestComponent},
       { path: '*', component: MarvelComponent}
     ], { useHash: true }),
     FormsModule,
@@ -39,7 +34,8 @@ import { MarvelService } from './services/marvel.service';
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
-    MarvelService
+    MarvelService,
+    PeopleNJobsService
   ],
   bootstrap: [AppComponent]
 })
