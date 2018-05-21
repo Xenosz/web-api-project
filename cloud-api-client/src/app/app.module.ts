@@ -8,11 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MarvelComponent } from './marvel/marvel.component';
+import { RestComponent } from './restapi/rest.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { MarvelService } from './services/marvel.service';
 import { PeopleNJobsService } from './services/peoplenjobs.service';
-import { RestComponent } from './restapi/rest.component';
 
 @NgModule({
   declarations: [

@@ -1,13 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
+import { HttpHeaders } from "@angular/common/http";
 
 @Injectable()
-export class peoplenjobsService {
+export class PeopleNJobsService {
     constructor(private _http: HttpClient) { }
-
-
-
+    userIdAuthToken = ""
+    httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.userIdAuthToken
+        })
+      };
     GetPeopleByQuery(gender:string, firstname:string, lastname:string, page, length): Observable<Person[]>{
         return this._http.get<Person[]>("localhost:5000/api/v1/people?firstname="+ firstname +"&lastname="+ lastname +
          "&gender="+ gender+ "&page=" +page+"&lenght="+length);
@@ -15,20 +20,20 @@ export class peoplenjobsService {
     }
 
     GetAllPeople(): Observable<Person[]>{
-        return this._http.get<Person[]>("localhost:5000/api/v1/people");
-    }
-    GetAllJobs(): Observable<Job[]>{
-        return this._http.get<Job[]>("localhost:5000/api/v1/jobs");
+        return this._http.get<Person[]>("http://localhost:5000/api/v1/people?page=0&length=50");
     }
 
-    AddJob(job:Job): object{
-        return this._http.post("localhost:5000/api/v1/jobs",job,null);
+    GetAllJobs(): Observable<Job[]>{
+        return this._http.get<Job[]>("http://localhost:5000/api/v1/jobs?page=0&length=50");
+    }
+
+    AddJob(job:Job): Observable<Object>{
+        return this._http.post<Job>("http://localhost:5000/api/v1/jobs/",job,this.httpOptions);
     }
 
 
 
 }
-
 
 
 export interface Job {
